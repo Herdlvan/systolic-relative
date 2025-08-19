@@ -10,7 +10,7 @@ output reg [DATA_WIDTH*8-1:0] data_out
 reg [DATA_WIDTH-1:0]embedding[1024:0][7:0];
 
 initial begin
-        $readmemh("embedding.coe", embedding);
+        $readmemh("/Users/boysdontcry104/Documents/vscode/科研/module/quantized_weights_signed/quantized_embedding_K.txt", embedding);
     end
 
 always@(posedge clk)begin

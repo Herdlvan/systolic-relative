@@ -39,4 +39,20 @@ always @ (posedge clk or posedge reset) begin
     end
 end
 
+
+always @(posedge clk or posedge reset) begin
+    if (reset == 1'b1) begin
+        weight_address1 =0;
+end else if(weight_load)begin       
+        if(weight_address1 < INPUT_NODES - 1) begin
+            weight_address1 = weight_address1 + 1;
+        end else begin
+            weight_address1 = 0; 
+        end
+    end
+
+    
+end
+
+
 endmodule
