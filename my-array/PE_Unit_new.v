@@ -87,8 +87,7 @@ Crossbar2x2 crossbar_1 (
     .in1(actual_data_in_bottom),// 使用选择后的输入
     .out0(cb1_out0), //mac
     .out1(cb1_out1),//pass-through
-    .sel(ctrl_crossbar[1])
-);
+    .sel(ctrl_crossbar[1]));
 
 // Crossbar 2: 连接 right和 left output
 Crossbar2x2 crossbar_2 (
