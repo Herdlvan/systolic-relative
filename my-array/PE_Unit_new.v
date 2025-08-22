@@ -1,4 +1,4 @@
-module PE_Unit (
+module PE_Unit_New (
     input clk,
     input reset,
     // 数据输入
@@ -22,31 +22,36 @@ module PE_Unit (
     input input_sel_left,              // 左输入选择: 0=外部输入, 1=流动数据
     input input_sel_right,             // 右输入选择
     input input_sel_top,               // 上输入选择
-    input input_sel_bottom             // 下输入选择
+    input input_sel_bottom,            // 下输入选择
+    // 新增: 直接外部输入
+    input [DATA_WIDTH-1:0] external_data_in_left,
+    input [DATA_WIDTH-1:0] external_data_in_right,
+    input [DATA_WIDTH-1:0] external_data_in_top,
+    input [DATA_WIDTH-1:0] external_data_in_bottom
 );
 
 parameter DATA_WIDTH = 8;       // 数据位宽
 parameter ACCUM_WIDTH = 16;     // 累加器位宽（防溢出）
 
 //------------------------------------------
-// 新增: 输入多路选择器
+// 输入多路选择器
 //------------------------------------------
 wire [DATA_WIDTH-1:0] actual_data_in_left;
 wire [DATA_WIDTH-1:0] actual_data_in_right;
 wire [DATA_WIDTH-1:0] actual_data_in_top;
 wire [DATA_WIDTH-1:0] actual_data_in_bottom;
+ß
+// 左输入选择: 0=外部输入, 1=流动数据
+assign actual_data_in_left = input_sel_left ? data_in_left : external_data_in_left;
 
-// 左输入选择
-assign actual_data_in_left = input_sel_left ? data_out_right : data_in_left;
+// 右输入选择: 0=外部输入, 1=流动数据
+assign actual_data_in_right = input_sel_right ? data_in_right : external_data_in_right;
 
-// 右输入选择
-assign actual_data_in_right = input_sel_right ? data_out_left : data_in_right;
+// 上输入选择: 0=外部输入, 1=流动数据
+assign actual_data_in_top = input_sel_top ? data_in_top : external_data_in_top;
 
-// 上输入选择
-assign actual_data_in_top = input_sel_top ? data_out_bottom : data_in_top;
-
-// 下输入选择
-assign actual_data_in_bottom = input_sel_bottom ? data_out_top : data_in_bottom;
+// 下输入选择: 0=外部输入, 1=流动数据
+assign actual_data_in_bottom = input_sel_bottom ? data_in_bottom : external_data_in_bottom;
 
 //------------------------------------------
 // 1. Crossbar网络（8个2x2 Crossbar）

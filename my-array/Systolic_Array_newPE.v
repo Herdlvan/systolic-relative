@@ -124,7 +124,12 @@ generate
                     .input_sel_left(input_sel_left[i][j]),
                     .input_sel_right(input_sel_right[i][j]),
                     .input_sel_top(input_sel_top[i][j]),
-                    .input_sel_bottom(input_sel_bottom[i][j])
+                    .input_sel_bottom(input_sel_bottom[i][j]),
+                    // 新增: 直接外部输入
+                    .external_data_in_left(data_in_left[i]),
+                    .external_data_in_right(data_in_right[i]),
+                    .external_data_in_top(data_in_top[j]),
+                    .external_data_in_bottom(data_in_bottom[j])
                 );
             end
         end
