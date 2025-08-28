@@ -48,7 +48,7 @@ end else if(weight_load)begin
             weight_address1 = weight_address1 + 1;
         end else begin
             weight_address1 = 0; 
-        end
+        endß
     end
 
     
